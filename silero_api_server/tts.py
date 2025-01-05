@@ -154,8 +154,12 @@ class SileroTtsService:
         response = requests.get(lang_base_url)
         langs = [lang.split('/')[0] for lang in response.text.split('<a href="')][1:]
 
+        logger.info(f"Found languages: {response.text}")  
+
         # Enter each web directory and grab v3 model file links
         for lang in langs:
+            logger.info(f"Looking into directory {lang}")  
+
             response = requests.get(f"{lang_base_url}/{lang}")
             if not response.ok:
                 raise f"Failed to get languages: {response.status_code}"
@@ -165,6 +169,8 @@ class SileroTtsService:
             for lang_file in lang_files:
                 if lang_file.startswith('v3'):
                     lang_urls[lang_file]=f"{lang_base_url}/{lang}/{lang_file}"
+                else
+                    logger.info(f"{lang_file} is not v3") 
         with open('langs.json','w') as fh:
             json.dump(lang_urls,fh)
         return lang_urls

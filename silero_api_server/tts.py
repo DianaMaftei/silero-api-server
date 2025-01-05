@@ -169,7 +169,7 @@ class SileroTtsService:
             for lang_file in lang_files:
                 if lang_file.startswith('v3'):
                     lang_urls[lang_file]=f"{lang_base_url}/{lang}/{lang_file}"
-                else
+                else:
                     logger.info(f"{lang_file} is not v3") 
         with open('langs.json','w') as fh:
             json.dump(lang_urls,fh)

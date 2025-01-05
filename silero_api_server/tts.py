@@ -31,7 +31,7 @@ class SileroTtsService:
         logger.info(f"TTS Service loaded successfully")
 
         # Prevent generation failure due to too long input
-        self.max_char_length = 600
+        self.max_char_length = 200
 
         # Load model
         self.load_model(lang)
